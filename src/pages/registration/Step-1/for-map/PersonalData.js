@@ -32,7 +32,7 @@ export const PrsData = [
   {
     id: 6,
     name: "Номер телефона",
-    tp: "text",
+    tp: "tel",
     pcholder: "+7(___)-___-__-__",
   },
   {

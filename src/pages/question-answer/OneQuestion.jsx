@@ -12,7 +12,11 @@ export const OneQuestion = ({ title, answ }) => {
       <span className={isOpen ? styles.red_title : styles.def_title}>
         {title}
       </span>
-      {isOpen && <p className={styles.answer_text}>{answ}</p>}
+      {isOpen && (
+        <p style={{ whiteSpace: "pre-line" }} className={styles.answer_text}>
+          {answ}
+        </p>
+      )}
     </li>
   );
 };

@@ -1,9 +1,32 @@
 import styles from "./Form.module.scss";
+import { useState, useEffect } from "react";
 import { PrsData } from "./for-map/PersonalData";
 import { Address } from "./for-map/Address";
 // import { useForm } from "react-hook-form";
 
 export function Form({ onChange }) {
+  const [grades, setGrades] = useState([]);
+
+  useEffect(() => {
+    const fetchGrades = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/dict/grades");
+        if (!response.ok) {
+          throw new Error(`Ошибка: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("Ответ API:", data);
+
+        setGrades(data.message || []);
+      } catch (error) {
+        console.error("Ошибка при получении списка:", error);
+        setGrades([]);
+      }
+    };
+
+    fetchGrades();
+  }, []);
+
   const formMap = (expConst) => {
     return expConst.map((item) => (
       <div key={item.id} className={styles.form_field}>
@@ -12,12 +35,12 @@ export function Form({ onChange }) {
         </p>
 
         <div className={styles.form_back}>
-          <input type={item.tp} placeholder={item.pcholder} />
+          <input type={item.tp} placeholder={item.pcholder} required />
         </div>
 
         {item.name === "Город" && (
           <div className={styles.checkbox}>
-            <input type="checkbox" />
+            <input type="checkbox" required />
             <label>Являюсь жителем сельской местности</label>
           </div>
         )}
@@ -37,25 +60,13 @@ export function Form({ onChange }) {
             </p>
 
             <div className={styles.form_back}>
-              <select
-                className={styles.like_input}
-                aria-label="Default select example"
-              >
-                <option selected> </option>
-                <option value="1">Школьник</option>
-                <option value="2">Студент СПО</option>
-                <option value="3">Студент ВУЗа</option>
-                <option value="4">Дополнительные категории</option>
-                <option value="5">Представитель работодателя</option>
-                <option value="6">Представитель партнера</option>
-                <option value="7">Родитель или опекун</option>
-                <option value="8">Волонтер</option>
-                <option value="9">Специалист</option>
-                <option value="10">Учитель</option>
-                <option value="11">Наставник</option>
-                <option value="12">Научный руководитель</option>
-                <option value="13">Молодой специалист</option>
-                <option value="14">Эксперт</option>
+              <select className={styles.like_input} aria-label="Выбор роли">
+                <option value="">Выберите вариант</option>
+                {grades.map((grade) => (
+                  <option key={grade.id} value={grade.id}>
+                    {grade.title}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
