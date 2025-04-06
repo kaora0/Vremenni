@@ -6,25 +6,28 @@ import { Address } from "./for-map/Address";
 
 export function Form({ onChange }) {
   const [grades, setGrades] = useState([]);
+  const [regions, setRegions] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  const fetchDict = async (url, setter) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Ошибка: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Ответ API:", data);
+      setter(data.message || []);
+    } catch (error) {
+      console.error("Ошибка при получении списка:", error);
+      setter([]);
+    }
+  };
 
   useEffect(() => {
-    const fetchGrades = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/dict/grades");
-        if (!response.ok) {
-          throw new Error(`Ошибка: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Ответ API:", data);
-
-        setGrades(data.message || []);
-      } catch (error) {
-        console.error("Ошибка при получении списка:", error);
-        setGrades([]);
-      }
-    };
-
-    fetchGrades();
+    fetchDict("http://localhost:8080/mock/dicts/grades", setGrades);
+    fetchDict("http://localhost:8080/mock/dicts/regions", setRegions);
+    fetchDict("http://localhost:8080/mock/dicts/cities", setCities);
   }, []);
 
   const formMap = (expConst) => {
@@ -75,6 +78,44 @@ export function Form({ onChange }) {
           <h4 className={styles.head_form}>
             Детальная информация о месте проживания
           </h4>
+
+          {/* REGION */}
+
+          <div key={8} className={styles.form_field}>
+            <p>
+              Регион <span>*</span>
+            </p>
+
+            <div className={styles.form_back}>
+              <select className={styles.like_input} aria-label="Выбор роли">
+                <option value="">Выберите вариант</option>
+                {regions.map((region) => (
+                  <option key={region.id} value={region.id}>
+                    {region.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* CITY */}
+          <div key={9} className={styles.form_field}>
+            <p>
+              Город <span>*</span>
+            </p>
+
+            <div className={styles.form_back}>
+              <select className={styles.like_input} aria-label="Выбор роли">
+                <option value="">Выберите вариант</option>
+                {cities.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           {formMap(Address)}
           <div className={styles.house_and_ap}>
             <div className={styles.form_back}>
