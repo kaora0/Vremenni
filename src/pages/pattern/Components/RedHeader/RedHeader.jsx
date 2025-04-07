@@ -1,28 +1,34 @@
 import styles from "./RedHeader.module.scss";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export function RedHeader() {
   return (
     <>
       <div className={styles.container}>
         <ul className={styles.list}>
-          <li className={styles.deploy}>
-            <a href="#">Общая информация</a>
-          </li>
-          <li className={styles.deploy}>
-            <a href="#">Подготовка</a>
+          <li>
+            <Link to={"/"}>Новости</Link>
           </li>
           <li>
-          <Link to="/documents">Документы</Link>
+            <Link to={"/"}>Контакты</Link>
           </li>
           <li>
-            <a href="#">Для спонсоров</a>
+            <Link to="/documents">Документы</Link>
           </li>
           <li>
-          <Link to="/partners">Партнёры</Link>
+            <Link to="/Qapage">Вопросы и ответы</Link>
           </li>
           <li>
-          <Link to="/organizators">Организаторы</Link>
+            <a href="#">Участникам</a>
+          </li>
+          <li>
+            <Link to="/partners">Партнёры</Link>
+          </li>
+          <li>
+            <Link to="/organizators">Организаторы</Link>
+          </li>
+          <li>
+            <Link to={"/"}>Этапы проведения</Link>
           </li>
         </ul>
       </div>
