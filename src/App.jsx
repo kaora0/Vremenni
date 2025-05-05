@@ -1,5 +1,5 @@
-import styles from "./App.module.scss";
-import { Header } from "./Components/Header/Header";
+// import styles from "./App.module.scss";
+// import { Header } from "./Components/Header/Header";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Registration } from "./pages/registration/Registration";
 import { ArchDocPageRoute } from "./pages/archive_documents/ArchDocPage";
@@ -7,7 +7,7 @@ import { DocumentPageRoute } from "./pages/documents/DocPage";
 import { MainPageRoute } from "./pages/components/MainPage";
 import { OrganizatorsRoute } from "./pages/Organizators/Org";
 import { PartnersRoute } from "./pages/Partners/Part";
-import { QApage } from "./pages/question-answer/QApage";
+// import { QApage } from "./pages/question-answer/QApage";
 import { QaOut } from "./pages/question-answer/QaOut";
 
 function App() {
