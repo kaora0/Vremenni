@@ -10,7 +10,7 @@ export function RedHeader() {
             <Link to={"/"}>Новости</Link>
           </li>
           <li>
-            <Link to={"/"}>Контакты</Link>
+            <Link to={"/contacts"}>Контакты</Link>
           </li>
           <li>
             <Link to="/documents">Документы</Link>

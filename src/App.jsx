@@ -7,18 +7,12 @@ import { DocumentPageRoute } from "./pages/documents/DocPage";
 import { MainPageRoute } from "./pages/components/MainPage";
 import { OrganizatorsRoute } from "./pages/Organizators/Org";
 import { PartnersRoute } from "./pages/Partners/Part";
-// import { QApage } from "./pages/question-answer/QApage";
 import { QaOut } from "./pages/question-answer/QaOut";
+import { ContactPageRoute } from "./pages/Contacts/ContactPage";
 
 function App() {
   return (
     <>
-      {/* <Header /> */}
-      {/* <Pattern /> */}
-      {/* <Registration />  */}
-
-      {/* <QApage /> */}
-
       <Router>
         <Routes>
           <Route path="/" element={<MainPageRoute />} />
@@ -30,6 +24,7 @@ function App() {
           <Route path="/Partners" element={<PartnersRoute />} />
 
           <Route path="/Qapage" element={<QaOut />} />
+          <Route path="/contacts" element={<ContactPageRoute />} />
         </Routes>
       </Router>
     </>
